@@ -112,7 +112,7 @@ public class UserController {
      * @param employeeDTO the request containing the date and required skills
      * @return list of qualifying employees as DTOs
      */
-    @GetMapping("/employee/availability")
+    @PostMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
         return userService.findEmployeesForService(employeeDTO.getSkills(), employeeDTO.getDate())
                 .stream()
