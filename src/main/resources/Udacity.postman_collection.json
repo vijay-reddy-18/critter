@@ -7,6 +7,18 @@
 	"item": [
 		{
 			"name": "Save Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"customerId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -43,6 +55,18 @@
 		},
 		{
 			"name": "Save Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"petId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -55,7 +79,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"type\": \"CAT\",\r\n  \"name\": \"Kilo\",\r\n  \"birthDate\": \"2019-12-16T04:43:57.995Z\",\r\n  \"notes\": \"HI KILO\"\r\n, \"ownerId\": \"1\"\n}",
+					"raw": "{\r\n  \"type\": \"CAT\",\r\n  \"name\": \"Kilo\",\r\n  \"birthDate\": \"2019-12-16T04:43:57.995Z\",\r\n  \"notes\": \"HI KILO\",\r\n  \"ownerId\": \"{{customerId}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -78,6 +102,18 @@
 		},
 		{
 			"name": "Save Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"employeeId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -134,7 +170,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/user/employee/1",
+					"raw": "http://localhost:8082/user/employee/{{employeeId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -143,7 +179,7 @@
 					"path": [
 						"user",
 						"employee",
-						"1"
+						"{{employeeId}}"
 					]
 				}
 			},
@@ -203,7 +239,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"employeeIds\": [1],\n  \"petIds\": [1],\n  \"date\": \"2019-12-17\",\n  \"activities\": [\"PETTING\", \"FEEDING\"]\n}",
+					"raw": "{\n  \"employeeIds\": [{{employeeId}}],\n  \"petIds\": [{{petId}}],\n  \"date\": \"2019-12-17\",\n  \"activities\": [\"PETTING\", \"FEEDING\"]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -249,7 +285,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/schedule/pet/1",
+					"raw": "http://localhost:8082/schedule/pet/{{petId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -258,7 +294,7 @@
 					"path": [
 						"schedule",
 						"pet",
-						"1"
+						"{{petId}}"
 					]
 				}
 			},
@@ -289,7 +325,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/schedule/employee/1",
+					"raw": "http://localhost:8082/schedule/employee/{{employeeId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -298,7 +334,7 @@
 					"path": [
 						"schedule",
 						"employee",
-						"1"
+						"{{employeeId}}"
 					]
 				}
 			},
@@ -329,7 +365,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/schedule/customer/1",
+					"raw": "http://localhost:8082/schedule/customer/{{customerId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -338,7 +374,7 @@
 					"path": [
 						"schedule",
 						"customer",
-						"1"
+						"{{customerId}}"
 					]
 				}
 			},
@@ -446,7 +482,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/pet/owner/1",
+					"raw": "http://localhost:8082/pet/owner/{{customerId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -455,7 +491,7 @@
 					"path": [
 						"pet",
 						"owner",
-						"1"
+						"{{customerId}}"
 					]
 				}
 			},
@@ -486,7 +522,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/user/customer/pet/1",
+					"raw": "http://localhost:8082/user/customer/pet/{{petId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -496,7 +532,7 @@
 						"user",
 						"customer",
 						"pet",
-						"1"
+						"{{petId}}"
 					]
 				}
 			},
