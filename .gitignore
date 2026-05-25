@@ -1,0 +1,30 @@
+### Maven ###
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+### Spring Boot ###
+*.log
+spring.log
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+### Eclipse ###
+.project
+.classpath
+.settings/
+bin/
+
+### VS Code ###
+.vscode/
+
+### OS ###
+.DS_Store
+Thumbs.db
