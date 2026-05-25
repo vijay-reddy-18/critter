@@ -41,9 +41,10 @@ public class Customer {
     /**
      * One customer may own many pets.
      * CascadeType.ALL ensures pets are persisted/removed with the customer.
-     * FetchType.LAZY avoids loading all pets unnecessarily.
+     * EAGER: pet IDs are always needed when converting Customer to CustomerDTO
+     * in the controller layer, so lazy loading would cause LazyInitializationException.
      */
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Pet> pets = new ArrayList<>();
 
     public long getId() {

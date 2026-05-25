@@ -45,8 +45,9 @@ public class Schedule {
      * The employees participating in this schedule.
      * Using a List (ordered) to match the ScheduleDTO expectation of List<Long>.
      * The join table schedule_employee links schedule and employee.
+     * EAGER: must always be loaded when converting to DTO in controller layer.
      */
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "schedule_employee",
         joinColumns = @JoinColumn(name = "schedule_id"),
@@ -58,8 +59,9 @@ public class Schedule {
      * The pets involved in this schedule.
      * Using a List to match the ScheduleDTO expectation of List<Long>.
      * The join table schedule_pet links schedule and pet.
+     * EAGER: must always be loaded when converting to DTO in controller layer.
      */
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "schedule_pet",
         joinColumns = @JoinColumn(name = "schedule_id"),

@@ -38,9 +38,11 @@ public class Pet {
 
     /**
      * The customer who owns this pet.
-     * LAZY fetch — we don't always need the owner when loading a pet.
+     * EAGER fetch — owner id is always needed when converting Pet to PetDTO.
+     * LAZY would cause LazyInitializationException when accessed in controller
+     * layer after the service transaction has already closed.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     private Customer owner;
 
